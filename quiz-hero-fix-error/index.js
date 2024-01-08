@@ -136,11 +136,11 @@ document.querySelector("#submit").addEventListener("click", () => {
       ])
     );
   }
-
+console.log(storage);
   // Right side bar/ answer section
   let x = setTimeout(() => {
     showAnswers(answers);
-    console.log(answers)
+    // console.log(answers)
     displayResult.innerHTML = `
     <div class="h-[220px] w-[220px] mx-auto mt-8 flex flex-col justify-center border-2 rounded-tr-[50%] rounded-bl-[50%]"
   >
@@ -155,34 +155,24 @@ document.querySelector("#submit").addEventListener("click", () => {
     )}<span class="text-xs">sec</span></span>
     </p>
   </div>
-  
   <button onclick="location.reload();" class="bg-green-600 text-white w-full py-2 rounded mt-16">Restart</button>
-  ${storage
-        ? `<div class="mt-5">
-      <h1 class="text-center">Previous Submissions <button class="text-blue-800 text-xs" onclick={localStorage.clear();location.reload()}>Clear History</button></h1>
-    <div
-    class="flex justify-between items-center border rounded p-2 my-2 shadow-sm font-medium">
-    <div>Marks</div>
-    <div>Grade</div>
-    <div>Time</div>
-    </div>
-    ${storage
-          ?.reverse()
-          ?.map(
-            (item) => `<div
-      class="flex justify-between items-center border rounded p-2 my-2 shadow-sm">
-      <div>${item.marks}/60</div>
-      <div>${item.status}</div>
-      <div>${item.examTime}</div>
-      </div>`
-          )
-          ?.join("")}`
-        : ""
-      }
-  </div>
+  <div class="mt-5">
+                  <h1 class="text-center">Previous Submissions <button class="text-blue-800 text-xs" onclick={localStorage.clear();location.reload()}>Clear History</button></h1>
+              <div class="flex justify-between items-center border rounded p-2 my-2 shadow-sm font-medium">
+                  <div>Marks</div>
+                  <div>Grade</div>
+                  <div>Time</div>
+              </div>
+              <div class="flex justify-between items-center border rounded p-2 my-2 shadow-sm">
+                    <div>${totalMark}/60</div>
+                    <div class="${grade.color}">${grade.status}</div>
+                    <div>${timeTaken.innerText.replace(
+                      "sec",
+                      ""
+                    )}</div>
+               </div>
   `;
-
-    clearTimeout(x);
+    clearTimeout(x); 
   }, 1500);
   window.scrollTo(0, 0);
 });
